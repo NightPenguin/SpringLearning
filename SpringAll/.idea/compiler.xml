@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="mybatis" />
+        <module name="05_influxdb" />
+        <module name="03_multidatasource" />
+        <module name="06_rabbitmq" />
+        <module name="start_spring_boot" />
+        <module name="07_redis" />
+        <module name="02mybatis" />
+        <module name="04_aoplog" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="02mybatis" target="1.8" />
+      <module name="03_multidatasource" target="1.8" />
+      <module name="04_aoplog" target="1.8" />
+      <module name="05_influxdb" target="1.8" />
+      <module name="06_rabbitmq" target="1.8" />
+      <module name="07_redis" target="1.8" />
+      <module name="mybatis" target="1.8" />
+      <module name="redis" target="1.8" />
+      <module name="start_spring_boot" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="02mybatis" options="-parameters" />
+      <module name="03_multidatasource" options="-parameters" />
+      <module name="04_aoplog" options="-parameters" />
+      <module name="05_influxdb" options="-parameters" />
+      <module name="06_rabbitmq" options="-parameters" />
+      <module name="07_redis" options="-parameters" />
+      <module name="mybatis" options="-parameters" />
+      <module name="redis" options="-parameters" />
+      <module name="start_spring_boot" options="-parameters" />
+    </option>
+  </component>
+</project>

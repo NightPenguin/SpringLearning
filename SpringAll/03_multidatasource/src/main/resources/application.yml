@@ -1,0 +1,59 @@
+server:
+  servlet:
+    context-path: /web
+
+# Druid \u6570\u636E\u6E90\u914D\u7F6E
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      master:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://192.168.135.132:3306/babytun?useUnicode=true&serverTimezone=Asia/Shanghai&characterEncoding=UTF-8
+        username:  root
+        password: 123456a?
+        #\u8FDE\u63A5\u6C60\u914D\u7F6E\u4FE1\u606F
+        initial-size: 5
+        min-idle: 5
+        max-active: 20
+        # \u8FDE\u63A5\u8D85\u65F6\u7B49\u5F85
+        max-wait: 30000
+        # \u914D\u7F6E\u68C0\u6D4B\u53EF\u4EE5\u5173\u95ED\u7684\u7A7A\u95F2\u8FDE\u63A5\u95F4\u9694\u65F6\u95F4
+        time-between-eviction-runs-millis: 60000
+        # \u914D\u7F6E \u8FDE\u63A5\u5728\u6C60\u4E2D\u7684\u6700\u5C0F\u751F\u5B58\u65F6\u95F4
+        min-evictable-idle-time-millis: 300000
+        valiation-query: select 1
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        # \u6253\u5F00PSCache\uFF0C\u5E76\u4E14\u6307\u5B9A\u6BCF\u4E2A\u8FDE\u63A5\u4E0APSCache\u7684\u5927\u5C0F
+        poolPreparedStatements: false
+        #max-pool-prepared-statement-per-connection-size: 20
+        # \u914D\u7F6E\u76D1\u63A7\u7EDF\u8BA1\u62E6\u622A\u7684filters, \u53BB\u6389\u540E\u76D1\u63A7\u754C\u9762sql\u65E0\u6CD5\u7EDF\u8BA1, 'wall'\u7528\u4E8E\u9632\u706B\u5899
+        filters: stat,wall
+
+      slave:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://192.168.135.132:3306/icpmg?useUnicode=true&serverTimezone=Asia/Shanghai&characterEncoding=UTF-8
+        username: root
+        password: 123456a?
+        #\u8FDE\u63A5\u6C60\u914D\u7F6E\u4FE1\u606F
+        initial-size: 5
+        min-idle: 5
+        max-active: 20
+        # \u8FDE\u63A5\u8D85\u65F6\u7B49\u5F85
+        max-wait: 30000
+        # \u914D\u7F6E\u68C0\u6D4B\u53EF\u4EE5\u5173\u95ED\u7684\u7A7A\u95F2\u8FDE\u63A5\u95F4\u9694\u65F6\u95F4
+        time-between-eviction-runs-millis: 60000
+        # \u914D\u7F6E \u8FDE\u63A5\u5728\u6C60\u4E2D\u7684\u6700\u5C0F\u751F\u5B58\u65F6\u95F4
+        min-evictable-idle-time-millis: 300000
+        valiation-query: select 1 from DUAL
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        # \u6253\u5F00PSCache\uFF0C\u5E76\u4E14\u6307\u5B9A\u6BCF\u4E2A\u8FDE\u63A5\u4E0APSCache\u7684\u5927\u5C0F
+        poolPreparedStatements: false
+        #max-pool-prepared-statement-per-connection-size: 20
+        # \u914D\u7F6E\u76D1\u63A7\u7EDF\u8BA1\u62E6\u622A\u7684filters, \u53BB\u6389\u540E\u76D1\u63A7\u754C\u9762sql\u65E0\u6CD5\u7EDF\u8BA1, 'wall'\u7528\u4E8E\u9632\u706B\u5899
+        filters: stat,wall
+# mybatis 配置 —— 若配置完文件路径正确，无法生效，使用maven clean 之后重启项目

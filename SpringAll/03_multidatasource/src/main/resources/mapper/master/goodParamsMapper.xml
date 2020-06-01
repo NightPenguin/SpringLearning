@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 映射文件配置，指向接口 -->
+<mapper namespace="com.springboot.multidatasource.mapper.master.MasterMapper">
+
+    <select id="findById" parameterType="Integer" resultType="com.springboot.multidatasource.entity.GoodParams">
+        select * from t_goods_param where gp_id = #{value}
+    </select>
+
+<!--    &lt;!&ndash; 代表将查询到的每一条记录包装秤map，key 就是字段，value 就是字段值 &ndash;&gt;
+    <select id="findGoodParams" resultType="java.util.LinkedHashMap">
+        select * from t_goods_param where gp_id &gt; 2120 and gp_id &lt; 2140
+    </select>
+
+    &lt;!&ndash; 多参数查询 &ndash;&gt;
+    <select id="findGoodParamsByParam" parameterType="java.util.Map" resultType="java.util.Map">
+        select * from t_goods_param where goods_id = #{goodId} and gp_order = #{goodOrder}
+    </select>-->
+</mapper>

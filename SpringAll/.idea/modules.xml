@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/mybatis/02mybatis.iml" filepath="$PROJECT_DIR$/mybatis/02mybatis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/03_multidatasource/03_multidatasource.iml" filepath="$PROJECT_DIR$/03_multidatasource/03_multidatasource.iml" />
+      <module fileurl="file://$PROJECT_DIR$/04_aoplog/04_aoplog.iml" filepath="$PROJECT_DIR$/04_aoplog/04_aoplog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/05_influxdb/05_influxdb.iml" filepath="$PROJECT_DIR$/05_influxdb/05_influxdb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/06_rabbitmq/06_rabbitmq.iml" filepath="$PROJECT_DIR$/06_rabbitmq/06_rabbitmq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/07_redis/07_redis.iml" filepath="$PROJECT_DIR$/07_redis/07_redis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SpringAll.iml" filepath="$PROJECT_DIR$/.idea/SpringAll.iml" />
+      <module fileurl="file://$PROJECT_DIR$/02mybatis/mybatis.iml" filepath="$PROJECT_DIR$/02mybatis/mybatis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/01start_spring_boot/start_spring_boot.iml" filepath="$PROJECT_DIR$/01start_spring_boot/start_spring_boot.iml" />
+    </modules>
+  </component>
+</project>

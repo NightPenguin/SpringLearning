@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+        
+<configuration>
+    <!-- 若数据库字段以下划线隔开，需要添加此配置，否则查询数据为null-->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase"  value="true" />
+    </settings>
+</configuration>

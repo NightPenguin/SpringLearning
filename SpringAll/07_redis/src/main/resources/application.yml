@@ -1,0 +1,15 @@
+server:
+  servlet:
+    context-path: /web
+spring:
+  # redis \u914D\u7F6E
+  redis:
+    database: 0
+    host: 192.168.135.132
+    port: 6379
+    jedis:
+      pool:
+        max-active: 100
+        max-idle: 100
+        min-idle: 10
+        max-wait: 1000ms

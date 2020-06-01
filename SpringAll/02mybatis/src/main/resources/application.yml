@@ -1,0 +1,61 @@
+#配置根路径
+server:
+  servlet:
+    context-path: /web
+
+#Druid 数据源配置
+spring:
+  datasource:
+    # Druid \u914D\u7F6E
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      # 数据库连接信息
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://192.168.135.132:3306/babytun?useUnicode=true&serverTimezone=Asia/Shanghai&characterEncoding=UTF-8
+      username: root
+      password: 123456a?
+      # 连接池配置
+      initial-size: 5
+      min-idle: 5
+      max-active: 50
+      # 连接超时时间
+      max-wait: 5000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 6000
+      # 配置连接在池中的最小生存时间
+      min-evictable-idle-time-millis: 300000
+      # 检测是否为有效SQL
+      validation-query: select 'x'
+      # 测试连接( 开启降低性能 )
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: false
+      # 状态监控
+      filter:
+        stat:
+        enabled: true
+        db-type: mysql
+        log-slow-sql: true
+        slow-sql-millis: 2000
+      # 监控过滤器
+      web-stat-filter:
+        enabled: true
+        exclusions:
+        - "*.js"
+        - "*.gif"
+        - "*.jpg"
+        - "*.png"
+        - "*.css"
+        - "*.ico"
+        - "/druid/*"
+      # druid 监控页面
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        reset-enable: false
+        login-username: root
+        login-password: root
+# mybatis 配置 —— 若配置完文件路径正确，无法生效，使用maven clean 之后重启项目
+mybatis:
+  config-location: classpath:/mybatis/mybatis-config.xml
+  mapper-locations: classpath:/mybatis/mappers/*.xml

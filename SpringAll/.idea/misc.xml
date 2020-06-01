@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptSettings">
+    <option name="languageLevel" value="ES6" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/start_spring_boot/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis/pom.xml" />
+        <option value="$PROJECT_DIR$/03_multidatasource/pom.xml" />
+        <option value="$PROJECT_DIR$/01start_spring_boot/pom.xml" />
+        <option value="$PROJECT_DIR$/02mybatis/pom.xml" />
+        <option value="$PROJECT_DIR$/05_influxdb/pom.xml" />
+        <option value="$PROJECT_DIR$/04_aoplog/pom.xml" />
+        <option value="$PROJECT_DIR$/06_rabbitmq/pom.xml" />
+        <option value="$PROJECT_DIR$/07_redis/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State />
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>Android</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+</project>

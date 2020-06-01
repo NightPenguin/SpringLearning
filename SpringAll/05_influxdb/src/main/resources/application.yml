@@ -1,0 +1,20 @@
+#\u521D\u59CB\u5316\u9879\u76EE\u5DE5\u7A0B\u8DEF\u5F84
+server:
+  port: 9999
+  servlet:
+    context-path: /influxdb
+#inlfuxdb \u6570\u636E\u5E93\u914D\u7F6E
+influx:
+  url: 192.168.135.132:8086
+  user: admin
+  password: admin
+  databases: icpmg
+  pretty: true
+  epoch: s
+  precision: s
+
+
+
+spring:
+  influx:
+    password:

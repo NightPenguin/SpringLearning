@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/01start_spring_boot" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/02mybatis" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/03_multidatasource" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/04_aoplog" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/05_influxdb" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/06_rabbitmq" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/07_redis" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/07_redis" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>
