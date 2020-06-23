@@ -6,7 +6,7 @@ server:
 #Druid 数据源配置
 spring:
   datasource:
-    # Druid \u914D\u7F6E
+    # Druid 连接池
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       # 数据库连接信息

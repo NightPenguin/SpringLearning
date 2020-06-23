@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 映射文件配置，指向接口 -->
+<mapper namespace="com.springboot.aoplog.mapper.SysLogMapper">
+
+    <insert id="saveSysLog" parameterType="SysLog" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_log username, operation, time, method, params, ipaddr, ctime
+        value
+        #{username}, #{operation}, #{time}, #{method}, #{params}, #{ip}, #{ctime}
+        <selectKey keyColumn="id" resultType="Integer" keyProperty="id" order="AFTER">
+            select_last_insert_id()
+        </selectKey>
+    </insert>
+
+</mapper>
