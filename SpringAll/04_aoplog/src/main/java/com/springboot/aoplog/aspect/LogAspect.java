@@ -11,6 +11,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ import java.util.Date;
  * 定义日志切点和切面
  */
 @Aspect
+@Component
 public class LogAspect {
 
     @Resource
@@ -71,7 +73,7 @@ public class LogAspect {
         if (args != null && paramNames != null) {
             String params = "";
             for (int i = 0; i < args.length; i++) {
-                params = " " + paramNames[i] + ": " + args[i];
+                params += " " + paramNames[i] + ": " + args[i];
             }
 
             sysLog.setParams(params);
@@ -88,7 +90,7 @@ public class LogAspect {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         sysLog.setCtime(simpleDateFormat.format(data));
 
-        sysLogMapper.saveSysLog(sysLog);
+        System.out.println(sysLogMapper.saveSysLog(sysLog));
     }
 
 }
