@@ -1,0 +1,33 @@
+JDK 5.0 提供四个元注解
+@Target：用于描述注解的使用范围（即：别描述的注解可使用的范围）
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.ANNOTATION_TYPE)
+public @interface Target {
+    ElementType[] value();
+}
+    ElementType取值范围：
+    1、constructor：用于描述构造器。
+    2、field：用于描述成员变量。
+    3、local_variable：用于描述局部变量。
+    4、method：用于描述方法。
+    5、package：用于描述包。
+    6、parameter：用于描述参数
+    7、type：用于描述类、接口、或enum声明。
+
+@Retention：只被描述的注解在什么范围有效
+    @Documented
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(ElementType.ANNOTATION_TYPE)
+    public @interface Retention {
+
+        RetentionPolicy value();
+    }
+    RetentionPolicy 取值范围：
+       1、source：在源文件中有效。
+       2、class：在class 文件中有效。
+       3、runtime：在运行时有效。
+@Document：是一个标记注解，木有成员，用于描述其他类型的annotation（应该被作为标注的程序成员的公共API），
+        因此可以被 javadoc 此类的工具文档化。
+@Inherited：是一个标记注解，阐述某个被标注的类型是被继承的。若果一个使用了@Inherited 修饰的annotation 类型
+        被用于一个class，则这个annotation 将被用于该class 的之类。

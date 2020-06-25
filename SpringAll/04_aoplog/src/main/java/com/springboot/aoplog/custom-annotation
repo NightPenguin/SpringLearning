@@ -1,0 +1,14 @@
+自定义 Annotation
+    1、使用@interface 自定义注解时，自动继承java.lang.annotation.Annotation 接口，由编译程序自动完成其他细节。
+在自定义注解时，不能继承其他的注解或者接口。
+    2、@interface 用来声明一个注解，其中每一个方法实际上是声明一个成员变量。
+           方法名称就是成员的名称。返回值类型就是成员的类型。可以通过default 类声明默认值。
+    3、注解的成员定义满足一下三点：
+        a、成员只能用public 或者默认（default） 修饰。
+        b、成员变量类型只能是基本型，String，Enum、class、Annotation。
+        c、如果只有一个成员变量，最好将成员名称设置为value。
+
+    <T extends Annotation> T getAnnotation(Class<T> annotationType) // 根据annotationType获取注解对象
+    Annotation[] getAnnotations() // 获取所有注解
+    boolean isAnnotationPresent(Class<T> annotationType) // 判断当前元素是否被annotationType注解
+    Annotation[] getDeclareAnnotations() // 与getAnnotations() 类似，但是不包括父类中被Inherited修饰的注解
