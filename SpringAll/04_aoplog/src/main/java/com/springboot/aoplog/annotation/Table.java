@@ -15,5 +15,17 @@ public @interface Table {
      * 用来设置表名
      * @return
      */
-    String value();
+    String name();
+
+    /**
+     * 设置编码
+     * @return
+     */
+    String charSet() default "utf8mb4";
+
+    /**
+     * 表注释
+     * @return
+     */
+    String comment() default "";
 }

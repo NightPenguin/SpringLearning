@@ -5,7 +5,7 @@ import com.springboot.aoplog.annotation.Table;
 
 import java.util.Date;
 
-@Table("sys_dict")
+@Table(name = "sys_dict",comment = "字典表")
 public class SysDict {
     @Column(name = "id", length = 64, isNotNull = true, isAutoIncrement = true, comment = "编号", isPrimaryKey = true)
     int id;

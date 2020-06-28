@@ -7,9 +7,7 @@ import com.springboot.aoplog.annotation.Table;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * 初始化工具-用于创建sql 语句（创建表）
@@ -17,7 +15,8 @@ import java.util.List;
 public class InitTableAndColumnUtil {
 
     public static String createTable(Class<?> bean) {
-        String tableName = initTableName(bean);
+        Map<String, String> tableMap = initTableName(bean);
+        String tableName = tableMap.get("name");
         List<ColumnBean> columns = initColumn(bean);
 
         //主键
@@ -90,11 +89,17 @@ public class InitTableAndColumnUtil {
                 }
                 primaryKeySql.append(") USING BTREE");
             }
+            sql.append(primaryKeySql.toString() + ")");
 
-            sql.append(primaryKeySql.toString() + " );");
+
+            if (tableMap.get("comment") != null && !tableMap.get("comment").equals("")) {
+                sql.append(" CHARSET=" + tableMap.get("charset") + " COMMENT=\'" + tableMap.get("comment") + "\';");
+            } else {
+                sql.append(" CHARSET=" + tableMap.get("charset") + ";");
+            }
 
             return sql.toString();
-        }else {
+        } else {
             throw new RuntimeException("table's name is null");
         }
     }
@@ -110,21 +115,39 @@ public class InitTableAndColumnUtil {
      */
 
 
-    private static String initTableName(Class<?> tablename) {
+    private static Map initTableName(Class<?> tablename) {
+        Map<String, String> tableMap = new HashMap<String, String>();
+
         // 表名
         String tableName = null;
+        String charSet = null;
+        String comment = null;
         if (tablename.isAnnotationPresent(Table.class)) {
             // 如果该对象按在指定类型的注解，则返回该注解，否则返回null。 只有类级别的注解会被继承得到
             Annotation tableAnnotation = tablename.getAnnotation(Table.class);
 
             try {
-                Method method = Table.class.getMethod("value");
+                Method method = Table.class.getMethod("name");
                 tableName = (String) method.invoke(tableAnnotation);
+                tableMap.put("name", tableName);
+
+                Method charSetMethod = Table.class.getMethod("charSet");
+                charSet = (String) charSetMethod.invoke(tableAnnotation);
+                if (charSet == null || charSet.equals("")) {
+                    tableMap.put("charset", "utf8mb4");
+                }else{
+                    tableMap.put("charset",charSet);
+                }
+
+                Method commentMethod = Table.class.getMethod("comment");
+                comment = (String) commentMethod.invoke(tableAnnotation);
+                tableMap.put("comment", comment);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        return tableName;
+        return tableMap;
     }
 
     private static List<ColumnBean> initColumn(Class<?> bean) {
