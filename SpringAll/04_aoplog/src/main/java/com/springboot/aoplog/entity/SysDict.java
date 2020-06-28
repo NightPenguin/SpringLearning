@@ -7,13 +7,13 @@ import java.util.Date;
 
 @Table("sys_dict")
 public class SysDict {
-    @Column(name="id", length = 64, isNotNull = true,comment = "编号")
+    @Column(name = "id", length = 64, isNotNull = true, isAutoIncrement = true, comment = "编号", isPrimaryKey = true)
     int id;
     @Column(name = "type", length = 100, defaultValue = "NULL")
     String type;
     @Column(name = "description", length = 100, defaultValue = "NULL")
     String description;
-    @Column(name = "create_time",isNotNull = true, defaultValue = "CURRENT_TIMESTAMP", comment = "创建时间")
+    @Column(name = "create_time", isNotNull = true, defaultValue = "CURRENT_TIMESTAMP", comment = "创建时间")
     Date createtime;
     @Column(name = "updatetime", isNotNull = true, defaultValue = "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP", comment = "更新时间")
     Date updatetime;
