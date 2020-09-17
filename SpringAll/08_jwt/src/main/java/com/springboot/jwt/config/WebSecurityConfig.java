@@ -1,5 +1,6 @@
 package com.springboot.jwt.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,12 +14,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -46,9 +49,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 // antNatchers()：采用ANT 模式匹配器。
                 // 使用？匹配任意单个字符，使用* 匹配任意多个字符，使用** 匹配任意多个目录
-                .antMatchers("/andmin/api/**").hasRole("ADMIN")
+                .antMatchers("/admin/api/**").hasRole("ADMIN")
                 .antMatchers("/user/api/**").hasRole("USER")
-                .antMatchers("/app/api/**").permitAll()
+                //.antMatchers("/app/api/**").permitAll()
 
                 .anyRequest().authenticated() // 匹配任意URL 请求
                 .and()
@@ -90,23 +93,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable();
     }
 
-    /**
-     * 基于内存认证
-     * @return
-     */
-    @Bean
-    PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
-    }
 
+    /**
+     * 允许我们配置认证用户
+     * @param builder
+     * @throws Exception
+     *//*
     @Override
     protected void configure(AuthenticationManagerBuilder builder) throws Exception {
         builder.inMemoryAuthentication()
                 .withUser("admin").password("123456").roles("ADMIN")
                 .and()
                 .withUser("user").password("123456").roles("USER");
+    }*/
+
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
     }
 
+    /**
+     * 基于内存认证的多用户支持
+     * @return
+     */
     /*@Bean
     public UserDetailsService userDetailsService() {
         // UserDetailService：抽象接口，Spring Security支持各种来源的用户数据，包括内存、数据库、LDAP 等。
@@ -114,6 +123,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
         manager.createUser(User.withUsername("user").password("123456").roles("USER").build());
         manager.createUser(User.withUsername("admin").password("123456").roles("ADMIN").build());
+        return manager;
+    }*/
+
+    /*@Autowired
+    private DataSource dataSource;
+
+    *//**
+     * 使用数据库管理用户, 自定义实现则注销
+     * @return
+     *//*
+    @Bean
+    public UserDetailsService userDetailsService() {
+        JdbcUserDetailsManager manager = new JdbcUserDetailsManager();
+        manager.setDataSource(dataSource);
+        if(!manager.userExists("user")){
+            manager.createUser(User.withUsername("user").password("123456").roles("USER").build());
+        }
+        if(!manager.userExists("admin")){
+            manager.createUser(User.withUsername("admin").password("123456").roles("ADMIN").build());
+        }
         return manager;
     }*/
 }
