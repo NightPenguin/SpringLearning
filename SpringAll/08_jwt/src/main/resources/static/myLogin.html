@@ -11,9 +11,16 @@
         <h2>Acced Form</h2>
         <div>
             <h1>LOGIN FROM</h1>
-            <form action="myLogin.html" method="post">
+            <form action="/auth/form" method="post">
                 <input type="text" name="username" placeholder="username" />
                 <input type="password" name="password" placeholder="password" />
+                <!--新增图形验证码-->
+                <div>
+                    <!--新增图形验证码的输入框-->
+                    <input type="text" name="captcha" placeholder="captcha" />
+                    <!--图片指向图形验证码API-->
+                    <img src="/captcha.jpg" alt="captcha" height="20px" width="150px" style="margin-left: 20px"
+                </div>
                 <div>
                     <a href="#">forgot Password</a>
                     <input type="submit" value="Login" />
