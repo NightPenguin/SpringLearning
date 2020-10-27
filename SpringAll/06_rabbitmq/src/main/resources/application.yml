@@ -5,49 +5,49 @@ spring:
   application:
     name: kafkaDemo
   kafka:
-    #kafka \u96C6\u7FA4\uFF0C\u4EE5\u9017\u53F7\u5206\u9694\u7684\u5730\u5740\u5217\u8868
+    #kafka 集群，以逗号分隔的地址列表
     bootstrap-servers: 192.168.135.132:9092
-    #\u751F\u4EA7\u8005\u914D\u7F6E
+    #生产者配置
     producer:
       acks: 1
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
-      #\u9ED8\u8BA4\u6279\u6B21\u5927\u5C0F
+      #默认批次大小
       batch-size: 16384
-      # \u5F53\u751F\u4EA7\u7AEF\u79EF\u7D2F\u7684\u6D88\u606F\u8FBE\u5230batch-size\u6216\u63A5\u6536\u5230\u6D88\u606Flinger.ms\u540E,\u751F\u4EA7\u8005\u5C31\u4F1A\u5C06\u6D88\u606F\u63D0\u4EA4\u7ED9kafka,
-      #linger.ms\u4E3A0\u8868\u793A\u6BCF\u63A5\u6536\u5230\u4E00\u6761\u6D88\u606F\u5C31\u63D0\u4EA4\u7ED9kafka,\u8FD9\u65F6\u5019batch-size\u5176\u5B9E\u5C31\u6CA1\u7528\u4E86
+      # 当生产端积累的消息达到batch-size或接收到消息linger.ms后,生产者就会将消息提交给kafka,
+      #linger.ms为0表示每接收到一条消息就提交给kafka,这时候batch-size其实就没用了
       properties:
         linger:
           ms: 5
-      #\u53D1\u751F\u9519\u8BEF\u65F6\uFF0C\u91CD\u8BD5\u6B21\u6570
+      #发生错误时，重试次数
       retries: 0
-      # \u7F13\u51B2\u533A\u5927\u5C0F 32M
+      # 缓冲区大小 32M
       buffer-memory: 33554432
-    #\u624B\u52A8\u63D0\u4EA4 \uFF08 \u76F8\u5E94\u7684enable-auto-commit \u9700\u8981\u8BBE\u7F6E\u4E3Afalse\uFF09
-    # record\uFF1A\u6BCF\u5904\u7406\u4E00\u6761commit\u3002           batch\uFF1A\u6BCF\u6B21poll \u7684\u65F6\u5019\uFF0C\u6279\u91CF\u63D0\u4EA4\u4E00\u6B21\u3002
-    # time\uFF1A \u6BCF\u4E2Aack-time \u95F4\u9694\u63D0\u4EA4\u4E00\u6B21\u3002   count\uFF1A\u6BCF\u6B21\u8FBE\u5230ack-count \u6570\u91CF\u63D0\u4EA4\u4E00\u6B21\u3002
-    # count_time: ack-time \u6216\u8005ack-count \u6EE1\u8DB3\u5176\u4E2D\u4E00\u4E2A\u5C31\u63D0\u4EA4\u4E00\u6B21\u3002
-    # manual\uFF1Alistener \u8D1F\u8D23ack\uFF08\u6279\u91CF\uFF09\u3002
-    # manual_immedieate\uFF1Alistener \u8D1F\u8D23ack\uFF0C\u6BCF\u8C03\u7528\u4E00\u6B21\uFF0C\u5C31\u7ACB\u5373commit\u3002
+    #手动提交 （ 相应的enable-auto-commit 需要设置为false）
+    # record：每处理一条commit。           batch：每次poll 的时候，批量提交一次。
+    # time： 每个ack-time 间隔提交一次。   count：每次达到ack-count 数量提交一次。
+    # count_time: ack-time 或者ack-count 满足其中一个就提交一次。
+    # manual：listener 负责ack（批量）。
+    # manual_immedieate：listener 负责ack，每调用一次，就立即commit。
     listener:
       ack-mode: manual
 
-    #\u6D88\u8D39\u8005\u914D\u7F6E
+    #消费者配置
     consumer:
       group-id: test
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      #\u662F\u5426\u81EA\u52A8\u63D0\u4EA4\u504F\u79FB\u91CF,true\uFF08 auto-commit-interval \u9700\u8981\u8FD9\u4E2A\u6BEB\u79D2\u503C\uFF09
+      #是否自动提交偏移量,true（ auto-commit-interval 需要这个毫秒值）
       enable-auto-commit: false
-      #\u63D0\u4EA4\u5EF6\u65F6\uFF08\u63A5\u6536\u5230\u6D88\u606F\u591A\u5C11\u79D2\u4E4B\u540E\u63D0\u4EA4offset\uFF09
+      #提交延时（接收到消息多少秒之后提交offset）
       auto-commit-interval: 10000
-      #\u4E00\u6B21\u8C03\u7528poll()\u64CD\u4F5C\u65F6\u8FD4\u56DE\u7684\u6700\u5927\u8BB0\u5F55\u6570
+      #一次调用poll()操作时返回的最大记录数
       max-poll-records: 5
-      # \u5F53kafka\u4E2D\u6CA1\u6709\u521D\u59CBoffset\u6216offset\u8D85\u51FA\u8303\u56F4\u65F6\u5C06\u81EA\u52A8\u91CD\u7F6Eoffset
-      # earliest:\u91CD\u7F6E\u4E3A\u5206\u533A\u4E2D\u6700\u5C0F\u7684offset;
-      # latest:\u91CD\u7F6E\u4E3A\u5206\u533A\u4E2D\u6700\u65B0\u7684offset(\u6D88\u8D39\u5206\u533A\u4E2D\u65B0\u4EA7\u751F\u7684\u6570\u636E);
-      # none:\u53EA\u8981\u6709\u4E00\u4E2A\u5206\u533A\u4E0D\u5B58\u5728\u5DF2\u63D0\u4EA4\u7684offset,\u5C31\u629B\u51FA\u5F02\u5E38;
+      # 当kafka中没有初始offset或offset超出范围时将自动重置offset
+      # earliest:重置为分区中最小的offset;
+      # latest:重置为分区中最新的offset(消费分区中新产生的数据);
+      # none:只要有一个分区不存在已提交的offset,就抛出异常;
       auto-offset-reset: latest
 
-    #\u6279\u91CF\u6D88\u8D39 spring.kafka.listener.type = batch
-    #\u6279\u91CF\u6D88\u8D39\u6BCF\u6B21\u6700\u591A\u6D88\u8D39\u591A\u5C11\u6761\u4FE1\u606F spring.kafka.comsumer.max-poll-records
+    #批量消费 spring.kafka.listener.type = batch
+    #批量消费每次最多消费多少条信息 spring.kafka.comsumer.max-poll-records
