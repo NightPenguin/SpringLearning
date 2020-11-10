@@ -43,7 +43,7 @@ public class LogAspect {
             e.printStackTrace();
         }
         long time = System.currentTimeMillis() - starttime;
-        saveLog(point,time);
+        saveLog(point, time);
         return result;
     }
 
@@ -54,7 +54,7 @@ public class LogAspect {
         // 实体类
         SysLog sysLog = new SysLog();
 
-        // 获取方法的注解
+        // 获取方法的注解的注释信息
         Log logAnnotation = method.getAnnotation(Log.class);
         if (logAnnotation != null) {
             sysLog.setOperation(logAnnotation.value());
@@ -65,7 +65,7 @@ public class LogAspect {
         String methodName = methodSignature.getName();
         sysLog.setMethod(className + "." + methodName + "()");
 
-        // 请求方法的参数
+        // 请求方法的参数类型
         Object[] args = joinPoint.getArgs();
         // 获取请求方法参数名称
         LocalVariableTableParameterNameDiscoverer u = new LocalVariableTableParameterNameDiscoverer();
@@ -85,7 +85,7 @@ public class LogAspect {
         sysLog.setIp(IPUtils.getIpAddr(httpServletRequest));
         // 模拟用户
         sysLog.setUsername("user001");
-        sysLog.setTime((int)time);
+        sysLog.setTime((int) time);
         Date data = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         sysLog.setCtime(simpleDateFormat.format(data));
